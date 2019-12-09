@@ -8,76 +8,86 @@ procedure scantron is
     ip_file    : File_Type;
     no_q    : Natural;
     no_stud : Natural;
-    value         : Natural;
+    value   : Natural;
     line : Unbounded_String;
-
-    max : constant Integer:= 50;
-    r2 : constant positive := 1000;
-    subtype index is positive range 1..r2;
-    type arr is array(index) of Natural;
-
     i : Natural;
+    temp : Natural;    --temp variable
+    max : constant Integer:= 50;
+
+
+    ans_Maxrange : constant positive := 1000;
+    subtype index is positive range 1..ans_Maxrange;
+    type arr is array(index) of Natural;
     ans_key : arr;
+
+    
+    f_name: String(1 .. max);
+    Length : Integer range 0 .. max;
 
 
 --===============================      Reading File Procedure       =================================  
-
-procedure read_ans(File : out Ada.Text_IO.File_Type) is
-
-f_name: String(1 .. max);
-Length : Integer range 0 .. max;
-
+procedure read_ans is
 begin
-get_line(Item => f_name, Last => Length);
-   if Length = max then
-      skip_line;
-   end if;
+    Open (File => ip_file, Name => f_name(1..Length),Mode => Ada.Text_IO.In_File);
 
-i:= 1;
-
-    Open (File => File, Name => f_name(1..Length),Mode => Ada.Text_IO.In_File);
-
-    --Read first line => Number of Questions
-    Ada.Integer_Text_IO.Get (File,no_q);
-    Ada.Text_IO.put(Item => "no_q =>");
-    Ada.Integer_Text_IO.Put (no_q);
-    Ada.Text_IO.New_Line;
+    --skip number of questions lines    
+    Ada.Integer_Text_IO.Get (ip_file,temp);
     
-     
-    --read correct answer keys    
+    i:= 1;
+    --read correct answer keys
+    New_Line;    
     Ada.Text_IO.put("Ans Keys =>");
     while i <no_q+1 loop
-      Ada.Integer_Text_IO.Get (File,value);
+      Ada.Integer_Text_IO.Get (ip_file,value);
       Ada.Text_IO.New_Line;
       ans_key(i) := value;
       Ada.Integer_Text_IO.Put (ans_key(i));
       i:= i+1;
     end loop;
 
+end read_ans;
+
+--===============================      Main Procedure Begin        =================================  
+begin
+
+    Ada.Text_IO.Put_line(Item => "Enter File Name :");
+ --   read_ans(File=> ip_file);
+
+
+    get_line(Item => f_name, Last => Length);
+   if Length = max then
+      skip_line;
+   end if;
+
+    i:= 1;
+
+    Open (File => ip_file, Name => f_name(1..Length),Mode => Ada.Text_IO.In_File);
+
+    --Read first line => Number of Questions
+    Ada.Integer_Text_IO.Get (ip_file,no_q);
+    Ada.Text_IO.put(Item => "no_q =>");
+    Ada.Integer_Text_IO.Put (no_q);
+    Ada.Text_IO.New_Line;
+    
+    --skip ans_key line    
+    Ada.Integer_Text_IO.Get (ip_file,temp);
+     
     Ada.Text_IO.New_Line;
     
     --Count number of students
     no_stud := 0;
-    while not Ada.Text_IO.End_of_File(File) loop
-        line:= Ada.Strings.Unbounded.to_unbounded_string(Ada.Text_IO.get_line(File));
+    while not Ada.Text_IO.End_of_File(ip_file) loop
+        line:= Ada.Strings.Unbounded.to_unbounded_string(Ada.Text_IO.get_line(ip_file));
         no_stud := no_stud +1;
     end loop;
 
     no_stud:= no_stud-1;
     Ada.Text_IO.put("Number of students =>");
     Ada.Integer_Text_IO.put(no_stud);
-        
 
-    Ada.Text_IO.Close (File => File);
+    Ada.Text_IO.Close (File => ip_file);
 
-end read_ans;
-
-
-
---===============================      Main Procedure Begin        =================================  
-begin
-
-    Ada.Text_IO.Put_line(Item => "Enter File Name :");
-    read_ans(File=> ip_file);
+    --call procedure to read answer keys and student response;
+    read_ans;
 
 end scantron;
