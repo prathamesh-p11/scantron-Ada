@@ -3,19 +3,18 @@ with Ada.Integer_Text_IO; use Ada.Integer_Text_IO;
 with Ada.Strings.Unbounded; use Ada.Strings.Unbounded;
 with Ada.Text_IO.Unbounded_IO; use Ada.Text_IO.Unbounded_IO;  
 
-
 procedure scantron is
     ip_file    : File_Type;
-    no_q    : Natural;
-    no_stud : Natural;
-    value   : Natural;
-    average : Integer;
-    line : Unbounded_String;
-    i : Natural;
-    j : Natural;
+    no_q    : Natural;  --number of questions
+    no_stud : Natural;  --number of students
+    value   : Natural;  --read int and store in value 
+    average : Integer;  --clas avg
+    line : Unbounded_String;    --for couting number of lines
+    i : Natural;    --iterator
+    j : Natural;    --iterator
     temp : Natural;    --temp variable
-    temp2 : Natural;       --temp variable
-    max : constant Integer:= 50;
+    temp2 : Natural;   --temp variable
+    max : constant Integer:= 50;    --file name length
 
     Maxrange : constant positive := 1000;
     subtype index is positive range 1..Maxrange;
@@ -40,16 +39,16 @@ procedure scantron is
     s : arr;
 
 
-    f_name: String(1 .. max);
-    Length : Integer range 0 .. max;
+    f_name: String(1 .. max);       --stores file name 
+    Length : Integer range 0 .. max;    --length of file name
 
 
---===============================    Calculating student total marks Procedure    =================================  
+--===============================    Procedure to calculate student's total marks    =================================  
 function calc_score(stud_res : arr ; correct_ans: arr) return integer is
 p : integer;
 q : integer;
-mark : integer;
-total : integer;
+mark : integer; --mark per correct answer
+total : integer;    --total marks
 
 begin 
 p:=1;
@@ -81,26 +80,18 @@ begin
     Ada.Integer_Text_IO.Get (ip_file,temp);
     
     i:= 1;
-    --read correct answer keys
-   -- New_Line;    
-  --  Ada.Text_IO.put("Ans Keys =>");
     while i <no_q+1 loop
       Ada.Integer_Text_IO.Get (ip_file,value);
-     -- Ada.Text_IO.New_Line;
       ans_key(i) := value;
 --      Ada.Integer_Text_IO.Put (ans_key(i));
       i:= i+1;
     end loop;
     
 
-  --  New_Line;
-    --New_Line;
     i:= 1;
-    
     temp:= 0;
 
     --read stud response and print marksheet
-    
     put("   Student ID     Score");
     New_Line;
     put("=========================");
@@ -115,8 +106,8 @@ begin
             j:= j+1;
         end loop;
 
-        temp := calc_score(stud_ans,ans_key);
-        stud_total(i) := temp;
+        temp := calc_score(stud_ans,ans_key);           --call function to calc marks for student(i)
+        stud_total(i) := temp;                          --total for studentt(i)
 
         New_Line;
         put(stud_roll(i));
@@ -161,6 +152,7 @@ begin
     i:=1;
     j := 1;
     
+    --bubble sort marks and frequencies
     for i in 1..no_stud+1 loop
         for j in 1..no_stud-i loop
             if s(j) < s(j+1) then
@@ -182,8 +174,6 @@ begin
     put("     Score    Frequency");
     New_Line;
     put("===========================");
-    New_Line;
-
     i:=1;
     temp := 0;
     while i<no_stud+1 loop
@@ -206,7 +196,7 @@ begin
 
 end read_ans;
 
---===============================      Main Procedure Begin        =================================  
+--===============================   Main Procedure Begin        =================================  
 begin
 
     Ada.Text_IO.Put_line(Item => "Enter File Name :");
@@ -224,12 +214,10 @@ begin
     Ada.Integer_Text_IO.Get (ip_file,no_q);
   --  Ada.Text_IO.put(Item => "no_q =>");
   --  Ada.Integer_Text_IO.Put (no_q);
-    --Ada.Text_IO.New_Line;
     
     --skip ans_key line    
     Ada.Integer_Text_IO.Get (ip_file,temp);
      
-    --Ada.Text_IO.New_Line;
     
     --Count number of students
     no_stud := 0;
@@ -239,8 +227,6 @@ begin
     end loop;
 
     no_stud:= no_stud-1;
-    --Ada.Text_IO.put("Number of students =>");
-    --Ada.Integer_Text_IO.put(no_stud);
 
     Ada.Text_IO.Close (File => ip_file);
 
