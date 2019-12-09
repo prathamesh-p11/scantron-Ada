@@ -1,3 +1,7 @@
 scantron.ali
 scantron.exe
 scantron.o
+scan.adb
+scan.ali
+scan.exe
+scan.o

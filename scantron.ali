@@ -14,7 +14,7 @@ RV NO_STANDARD_STORAGE_POOLS
 RV NO_DEFAULT_INITIALIZATION
 RV SPARK_05
 
-U scantron%b		scantron.adb		70136450 NE OO SU IL
+U scantron%b		scantron.adb		98269a3d NE OO SU IL
 W ada%s			ada.ads			ada.ali
 Z ada.exceptions%s	a-except.adb		a-except.ali
 W ada.integer_text_io%s	a-inteio.ads		a-inteio.ali
@@ -22,6 +22,7 @@ W ada.strings%s		a-string.ads		a-string.ali
 W ada.strings.unbounded%s  a-strunb.adb		a-strunb.ali
 Z ada.tags%s		a-tags.adb		a-tags.ali
 W ada.text_io%s		a-textio.adb		a-textio.ali
+W ada.text_io.unbounded_io%s  a-tiunio.ads	a-tiunio.ali
 Z interfaces%s		interfac.ads		interfac.ali
 Z system.secondary_stack%s  s-secsta.adb	s-secsta.ali
 Z system.soft_links%s	s-soflin.adb		s-soflin.ali
@@ -38,13 +39,15 @@ D a-stream.ads		20191120212700 119b8fb3 ada.streams%s
 D a-string.ads		20191120212700 90ac6797 ada.strings%s
 D a-strmap.ads		20191120212700 e8bb714a ada.strings.maps%s
 D a-strunb.ads		20191120212700 ecdfa332 ada.strings.unbounded%s
+D a-suteio.ads		20191120212700 26d8e9aa ada.strings.unbounded.text_io%s
 D a-tags.ads		20191120212700 491b781d ada.tags%s
 D a-textio.ads		20191120212700 881db35a ada.text_io%s
 D a-tiinio.ads		20191120212700 aa04e5d6 ada.text_io.integer_io%s
+D a-tiunio.ads		20191120212700 759c6b0c ada.text_io.unbounded_io%s
 D a-unccon.ads		20191120212700 0e9b276f ada.unchecked_conversion%s
 D interfac.ads		20191120212700 5ab55268 interfaces%s
 D i-cstrea.ads		20191120212700 e53d8b8e interfaces.c_streams%s
-D scantron.adb		20191209033944 e29afd9c scantron%b
+D scantron.adb		20191209053502 7f3368fd scantron%b
 D system.ads		20191120212700 32a08138 system%s
 D s-atocou.ads		20191120212700 b45c2d8d system.atomic_counters%s
 D s-crtl.ads		20191120212700 0ebbdb71 system.crtl%s
@@ -67,53 +70,66 @@ D s-traent.ads		20191120212700 005bf670 system.traceback_entries%s
 D s-unstyp.ads		20191120212700 34867c83 system.unsigned_types%s
 D s-wchcon.ads		20191120212700 1b7d22d2 system.wch_con%s
 X 1 ada.ads
-16K9*Ada 20e8 18|1r6 1r23 2r6 2r31 3r6 4r5 22r4 22r50 24r5 25r5 26r5 27r5
-. 29r5 32r7 33r7 35r7 39r5 42r15 43r16 43r58 48r5 49r5 51r5
+16K9*Ada 20e8 20|1r6 1r23 2r6 2r31 3r6 3r33 4r6 4r36 25r31 38r59 41r5 42r5
+. 43r5 44r5 48r5 50r7 51r7 53r7 57r5 61r15 62r16 62r58 67r5 68r5 71r5 80r5
 X 6 a-inteio.ads
-18K13*Integer_Text_IO[14|46] 18|2w10 2r35 24r9 26r9 32r11 35r11 49r9
+18K13*Integer_Text_IO[15|46] 20|2w10 2r35 41r9 43r9 50r11 53r11 68r9
 X 9 a-string.ads
-16K13*Strings 35e16 18|3r10 4r9 43r20
+16K13*Strings 35e16 20|3r10 3r37 62r20
 X 11 a-strunb.ads
-76K21*Unbounded 490e26 18|3w18 4r17 43r28
-79R9*Unbounded_String<5|43R9> 474e14 18|11r12
-94V13*To_Unbounded_String{79R9} 18|43s38
-X 13 a-textio.ads
-49K13*Text_IO 471e16 18|1w10 1r27 22r8 22r54 25r9 27r9 29r9 33r11 39r9 42r19
-. 43r62 48r9 51r9
-52P9*File_Type 18|7r21
-53n23*In_File{53E9} 18|22r62
-92U14*Open 18|22s16
-93p7 File{52P9} 18|22r22
-94e7 Mode{53E9} 18|22r42
-95a7 Name{string} 18|22r71
-98U14*Close 18|51s17
-98p22 File{52P9} 18|51r24
-166U14*New_Line 18|27s17 33s19 39s17
-183V13*End_Of_File{boolean} 18|42s27
-242U14*Put 18|25s17 29s17 48s17
-242a19 Item{string} 18|25r21
-253V13*Get_Line{string} 18|43s70
-X 14 a-tiinio.ads
-51U14*Get 18|24s25[6|18] 32s27[6|18]
-66U14*Put 18|26s25[6|18] 35s27[6|18] 49s25[6|18]
-X 18 scantron.adb
-6U11*scantron 6b11 55l5 55t13
-7p5 Input_File{13|52P9} 22m30 22r30 24r30 32r32 42r39 43r79 51m32 51r32
-8i5 no_q{natural} 24m41 26r30 31r13
-9i5 no_stud{natural} 40m5 44m9 44r20 47m5 47r15 49r29
-10i5 value{natural} 32m43 34r21
-11r5 line{11|79R9} 43m9
-13i5 r2{positive} 14r40
-14I13 index{positive} 15r23
-15A10 arr(natural)<integer> 18r15
-17i5 i{natural} 21m5 31r10 34r15 35r40 36m7 36r11
-18a5 ans_key{15A10} 34m7 35r32
-X 19 system.ads
+76K21*Unbounded 490e26 20|3w18 3r45 62r28
+79R9*Unbounded_String<5|43R9> 474e14 20|12r12
+94V13*To_Unbounded_String{79R9} 20|62s38
+X 14 a-textio.ads
+49K13*Text_IO 471e16 20|1w10 1r27 4r10 4r40 25r35 38r63 42r9 44r9 48r9 51r11
+. 57r9 61r19 62r62 67r9 71r9 80r9
+52P9*File_Type 20|8r18 25r43
+53n23*In_File{53E9} 20|38r71
+92U14*Open 20|38s5
+93p7 File{52P9} 20|38r11
+94e7 Mode{53E9} 20|38r51
+95a7 Name{string} 20|38r25
+98U14*Close 20|71s17
+98p22 File{52P9} 20|71r24
+166U14*New_Line 20|44s17 51s19 57s17
+169U14*Skip_Line 20|33s7
+183V13*End_Of_File{boolean} 20|61s27
+242U14*Put 20|42s17 48s17 67s17
+242a19 Item{string} 20|42r21
+249U14*Get_Line 20|31s1
+250a7 Item{string} 20|31r10
+251i7 Last{natural} 20|31r26
+253V13*Get_Line{string} 20|62s70
+263U14*Put_Line 20|80s17
+264a7 Item{string} 20|80r26
+X 15 a-tiinio.ads
+51U14*Get 20|41s25[6|18] 50s27[6|18]
+66U14*Put 20|43s25[6|18] 53s27[6|18] 68s25[6|18]
+X 16 a-tiunio.ads
+25K21*Unbounded_IO 61e29 20|4w18 4r48
+X 20 scantron.adb
+7U11*scantron 7b11 83l5 83t13
+8p5 ip_file{14|52P9} 81m21 81r21
+9i5 no_q{natural} 41m35 43r30 49r14
+10i5 no_stud{natural} 60m5 63m9 63r20 66m5 66r15 68r29
+11i5 value{natural} 50m37 52r21
+12r5 line{11|79R9} 62m9
+14i5 max{integer} 27r21 28r29 32r16
+15i5 r2{positive} 16r40
+16I13 index{positive} 17r23
+17A10 arr(natural)<integer> 20r15
+19i5 i{natural} 36m1 49r11 52r15 53r40 54m7 54r11
+20a5 ans_key{17A10} 52m7 53r32
+25U11 read_ans 25b11 25<20 73l5 73t13 81s5
+25p20 File{14|52P9} 38m19 41r30 50r32 61r39 62r79 71m32 81r14
+27a1 f_name{string} 31m18 38r33
+28i1 Length{integer} 31m34 32r7 38r43
+X 21 system.ads
 67M9*Address
-X 26 s-memory.ads
-53V13*Alloc{19|67M9} 103i<c,__gnat_malloc>22
+X 28 s-memory.ads
+53V13*Alloc{21|67M9} 103i<c,__gnat_malloc>22
 68U14*Free 104i<c,__gnat_free>22
-76V13*Realloc{19|67M9} 105i<c,__gnat_realloc>22
-X 32 s-stalib.adb
+76V13*Realloc{21|67M9} 105i<c,__gnat_realloc>22
+X 34 s-stalib.adb
 93U14 Break_Start 94i<c,__gnat_break_start>22
 
